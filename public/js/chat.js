@@ -6,6 +6,7 @@ $messageFormInput = $messageForm.querySelector("input");
 $messageFormButton = $messageForm.querySelector("button");
 $sendLocation = document.querySelector("#sendLocation");
 $messageDiv = document.querySelector("#divmessage");
+$logout = document.querySelector('#logout')
 
 //templets
 const messages = document.querySelector("#messageTemp").innerHTML;
@@ -70,7 +71,7 @@ socket.on('roomData', ({ room, users }) => {
 socket.on('messageUrl', url => {
   console.log(url)
   const html = Mustache.render(messageUrl, {
-    username:url.username,
+    username: url.username,
     messageUrl: url.url,
     createdAt: moment(url.createdAt).format('h:mm a')
   })
@@ -99,7 +100,6 @@ $sendLocation.addEventListener("click", () => {
   if (!navigator.geolocation) {
     return alert("geolocation is not supported by your browser");
   }
-
   $sendLocation.setAttribute("disabled", "disabled");
 
   navigator.geolocation.getCurrentPosition(position => {
@@ -116,6 +116,10 @@ $sendLocation.addEventListener("click", () => {
     );
   });
 });
+
+$logout.addEventListener('click',()=>{
+  location.href='/'
+})
 
 socket.emit('join', { username, room }, (error) => {
   if (error) {
