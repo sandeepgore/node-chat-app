@@ -70,7 +70,7 @@ socket.on('roomData', ({ room, users }) => {
 socket.on('messageUrl', url => {
   console.log(url)
   const html = Mustache.render(messageUrl, {
-    username,
+    username:url.username,
     messageUrl: url.url,
     createdAt: moment(url.createdAt).format('h:mm a')
   })
