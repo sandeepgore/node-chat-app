@@ -46,7 +46,7 @@ const autoscroll = () => {
 
 }
 socket.on("message", msg => {
-  console.log(msg);
+  //console.log(msg);
 
   const html = Mustache.render(messages, {
     username: msg.username,
@@ -64,12 +64,12 @@ socket.on('roomData', ({ room, users }) => {
   })
 
   document.querySelector('#sidebar').innerHTML = html
-  console.log(room)
-  console.log(users)
+ // console.log(room)
+  //console.log(users)
 })
 
 socket.on('messageUrl', url => {
-  console.log(url)
+  //console.log(url)
   const html = Mustache.render(messageUrl, {
     username: url.username,
     messageUrl: url.url,
@@ -92,7 +92,7 @@ $messageForm.addEventListener("submit", e => {
     if (error) {
       return console.log(error);
     }
-    console.log("Delivered");
+    //console.log("Delivered");
   });
 });
 
@@ -111,15 +111,15 @@ $sendLocation.addEventListener("click", () => {
         longitude: position.coords.longitude
       },
       () => {
-        console.log("location is shared");
+      //  console.log("location is shared");
       }
     );
   });
 });
 
 $logout.addEventListener('click',()=>{
-  location.href='/'
-})
+    location.href='/'
+  })
 
 socket.emit('join', { username, room }, (error) => {
   if (error) {
